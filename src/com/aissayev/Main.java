@@ -3,26 +3,11 @@ package com.aissayev;
 public class Main {
 
     public static void main(String[] args) {
-	// write your code here
-        FootballPlayer joe = new FootballPlayer("Joe");
-        BaseballPlayer pat = new BaseballPlayer("Pat");
+
+        // Soccer - no league
         SoccerPlayer beckham = new SoccerPlayer("Beckham");
         SoccerPlayer zidane = new SoccerPlayer("Zidane");
         SoccerPlayer gotze = new SoccerPlayer("Gotze");
-
-        Team<FootballPlayer> adelaideCrows = new Team<>("Adelaide Crows");
-        adelaideCrows.addPlayer(joe);
-
-        System.out.println(adelaideCrows.numPlayers());
-
-        Team<BaseballPlayer> baseballTeam = new Team<>("Chicago Cubs");
-        baseballTeam.addPlayer(pat);
-
-//        Team<String> brokenTeam = new Team<>("this won't work");
-//        brokenTeam.addPlayer("no-one");
-
-//        Team<SoccerPlayer> brokenTeam = new Team<>("this won't work");
-//        brokenTeam.addPlayer("no-one");
 
         Team<SoccerPlayer> england = new Team<>("England");
         england.addPlayer(beckham);
@@ -46,5 +31,26 @@ public class Main {
         System.out.println(germany.compareTo(england));
         System.out.println(england.compareTo(france));
         System.out.println(france.compareTo(england));
+
+        // Football League
+        League<Team<FootballPlayer>> footbalLeague = new League<>("NFL");
+        Team<FootballPlayer> patriots = new Team<>("Patriots");
+        Team<FootballPlayer> giants = new Team<>("Giants");
+        Team<FootballPlayer> rams = new Team<>("Rams");
+        Team<FootballPlayer> jets = new Team<>("Jets");
+
+        footbalLeague.add(patriots);
+        footbalLeague.add(giants);
+        footbalLeague.add(rams);
+        footbalLeague.add(jets);
+
+        patriots.matchResult(giants, 1, 0);
+        patriots.matchResult(rams, 5, 3);
+        patriots.matchResult(jets, 3, 1);
+        giants.matchResult(rams, 2, 1);
+        giants.matchResult(jets, 2, 2);
+        rams.matchResult(jets, 0, 3);
+
+        footbalLeague.showLeagueTable();
     }
 }
